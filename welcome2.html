@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>江苏省公安监管大数据实战运用云平台</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/welcome.css">
+    <link rel="stylesheet" href="plugins/bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" href="css/style_layer_ext.css">
+    <style type="text/css">
+        html, body, div, table {
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        html, body {
+            overflow: hidden;
+            margin: 0px;
+            /*background-color: #F5F5F5;*/
+            background-color: white;
+        }
+
+        body {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            min-width:900px;
+        }
+
+        a:hover{
+            text-decoration:none;
+        }
+
+        a{
+            color: #272727;
+        }
+        #gzdbTable a{
+            color: #559eff;
+        }
+
+        .chart {
+            border-radius: 8px 8px 8px 8px;
+            min-height: 50px;
+            /*height:300px;*/
+            border: 0px solid #3058DD;
+            width: 100%;
+            background: #FFFFFF;
+            /*rgba(34,142,186,0.1);*/
+        }
+
+        .chart-title {
+            height: 40px;
+            background-color: transparent;
+            line-height: 40px;
+            border-radius: 8px 8px 0 0;
+            padding-left: 0.9rem;
+            /*font-size: 24px;
+            color:white;*/
+            font-size: 18px;
+            color: rgb(49,49,49);
+            /*border-radius:0px 0px 8px 8px;*/
+        }
+
+        .chart-title .chart-title-split {
+            width: 2px;
+            background-color: #559DFE;
+            float: left;
+            height: 20px;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+
+        .chart-title span{
+            font-weight: bold;
+        }
+
+        .chart-title span {
+            margin-left: 8px;
+        }
+
+        .chart-content {
+            overflow: hidden;
+            min-height: 10px;
+            /*height:260px;*/
+        }
+
+        #divLeft, #divCenter, #divRight {
+            float: left;
+            border: 0 solid red;
+            margin-top: 16px;
+        }
+
+        #divLeft {
+            margin-left: 16px;
+            margin-right: 8px;
+        }
+
+        #divCenter {
+        }
+
+        #divRight {
+            margin-left: 8px;
+        }
+
+        #divLeft_1, #divLeft_2, #divLeft_3, #divCenter_1, #divCenter_2, #divCenter_3, #divRight_0, #divRight_1, #divRight_2, #divRight_3 {
+            /*box-shadow: 0 2px 4px #999;*/
+        }
+
+        #divLeft_1, #divLeft_3, #divCenter_2, #divRight_0, #divRight_2{
+            background-color: #fafafa;
+        }
+
+        #divCenter_2{
+            box-shadow: 2px 2px 6px #ddd;
+        }
+
+
+        #divLeft_2 {
+            height: 200px;
+        }
+
+        #divCenter_1{
+            height: 120px;
+        }
+
+        #divLeft_2, #divLeft_3, #divCenter_2, #divCenter_3, #divRight_1, #divRight_2 {
+            margin-top: 8px;
+        }
+
+        #divCenter_2, #divCenter_3{
+            margin-top: 20px;
+        }
+
+        .peopleItem {
+            /*border-radius: 8px 8px 8px 8px;*/
+            min-height: 50px;
+            /*height:300px;*/
+            border-left: 0px solid #3058DD;
+            width: 32%;
+            float: left;
+            height: 100%;
+            /*margin-top: 2%;*/
+            text-decoration: none;
+        }
+
+        .peopleItem-title {
+            /*height: 35px;*/
+            background-color: transparent;
+            /*line-height: 35px;*/
+            border-radius: 8px 8px 0 0;
+            /*padding-left: 20px;*/
+            /*font-size: 24px;*/
+            font-size: 16px;
+            color: black;
+            text-align: center;
+            /*border-radius:0px 0px 8px 8px;*/
+        }
+
+        .peopleItem-content {
+            overflow: hidden;
+            min-height: 10px;
+            height: 44px;
+            /*height:260px;*/
+            font-size: 16px;
+            color: white;
+            text-align: center;
+        }
+
+        .peopleItem-content span:first-child {
+            font-size: 24px;
+            color: red;
+            cursor: pointer;
+            display: inline-block;
+            padding: 10px 0 10px 0;
+            overflow: hidden;
+        }
+
+        .peopleItem-content span:last-child {
+            font-size: 16px;
+            color: #ffffff;
+        }
+
+        #divPeoples .peopleItem:nth-child(4n+1) {
+            border-left: 0px solid #3058DD;
+        }
+
+        .peopleCount {
+            height: 2.3rem;
+            /*width:15%;*/
+            width: 2.2rem;
+            background-color: #5895E5;
+            float: left;
+            margin-left: 0.5rem;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-align: center;
+            line-height: 2.3rem;
+            /*margin-top: 10px;*/
+            border-radius: 4px 4px 4px 4px;
+        }
+
+        .peopleCount2 {
+            /*float: left;*/
+            height: 24px;
+            line-height: 24px;
+            /*border:1px solid red;*/
+            vertical-align: middle;
+            text-align: left;
+        }
+        .peopleCount2 span{
+            display:inline-block;
+            /*border:1px solid black;*/
+        }
+        .peopleCount2 img {
+            display: inline-block;
+            margin-right:8px;
+            /*border:1px solid black;*/
+            margin-top:-5px;
+            /*vertical-align: middle;*/
+
+        }
+        .fxry {
+            margin: 0 auto;
+            /*margin-top: 16px;*/
+            width: 90%;
+            border: 0px solid red;
+        }
+
+        .fxry_top {
+            width: 120px;
+            display: inline-block;
+            vertical-align: bottom;
+            margin-bottom: 6px;
+            float: left;
+        }
+
+        .fxry_div_title {
+            float: left;
+            height: 16px;
+            line-height: 16px;
+            font-size: 16px;
+        }
+
+        .fxry_div_val {
+            float: right;
+            color: #74ACFF;
+        }
+
+        .fxry_div_jd {
+            width: calc(100% - 150px);
+            /*border: 1px solid #0D96B5;*/
+            height: 10px;
+            border-radius: 5px;
+            margin-top: 4px;
+            float: left;
+        }
+
+        .jdzb, .jdwzb {
+            float: left;
+            height: 100%;
+        }
+
+        .jdzb {
+            background-color: #12C5FA;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .jdwzb {
+            background-color: #D8DFFA;
+            border-radius: 0px 5px 5px 0px;
+        }
+
+        .workItem {
+            border-radius: 8px 8px 8px 8px;
+            min-height: 50px;
+            /*height:300px;*/
+            border: 0px solid red;
+            width: 25%;
+            float: left;
+            height: 100%;
+        }
+
+        .workItem-title {
+            /*height: 100px;*/
+            /*background-color: transparent;*/
+            /*line-height: 120px;*/
+            /*border-radius: 8px 8px 0 0;*/
+            /*padding-left: 20px;*/
+            font-size: 24px;
+            color: #559EFF;
+            text-align: center;
+            /*border-radius:0px 0px 8px 8px;*/
+        }
+
+        .workItem-content {
+            overflow: hidden;
+            min-height: 10px;
+            /*height:260px;*/
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            /*height: 50px;*/
+            margin-bottom:20px;
+        }
+
+        .modelItem {
+            width: 160px;
+            height: 120px;
+            border-radius: 4px;
+            color: white;
+            float: left;
+            margin-right: 8px;
+            text-decoration: none;
+            box-shadow: 2px 2px 6px #ddd;
+        }
+        .modelItem:hover{
+            color: #fff;
+        }
+
+        .modelItem .modelItem-title {
+            height: 70px;
+            text-align: center;
+            font-size: 46px;
+            padding-top: 10px;
+        }
+
+        .modelItem .modelItem-content {
+            height: 50px;
+            text-align: center;
+            font-size: 16px;
+            line-height: 38px;
+            /*font-weight: 700;*/
+        }
+
+
+        .workItem2 {
+            border-radius: 8px 8px 8px 8px;
+            min-height: 50px;
+            /*height:300px;*/
+            border: 0px solid red;
+            width: 20% !important;
+            padding: 0 10px;
+            float: left;
+            /* height: 100%; */
+            text-decoration: none;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .workItem2-title {
+            /*height: 120px;*/
+            /*background-color: transparent;*/
+            /*line-height: 120px;*/
+            /*border-radius: 8px 8px 0 0;*/
+            /*padding-left: 20px;*/
+            /* font-size: 2.2rem; */
+            /* line-height: 3rem; */
+            margin-bottom: 6px;
+            color: #556575;
+            text-align: center;
+            /*border-radius:0px 0px 8px 8px;*/
+            position: relative;
+            z-index: 1;
+        }
+        .workItem2-bg{
+            background-color: #deecf5;
+            border-radius: 100px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .workItem2-content {
+            overflow: hidden;
+            min-height: 10px;
+            /*height:260px;*/
+            /* font-size: 16px; */
+            color: black;
+            text-align: center;
+            height: 50px;
+        }
+
+        .tab {
+            height: 40px;
+            padding-left: 8px;
+        }
+
+        .tab div {
+            margin-top: 8px;
+            height: 24px;
+            float: left;
+            display: inline-block;
+            border-radius: 14px;
+            font-size: 16px;
+            width: 74px;
+            text-align: center;
+            line-height: 24px;
+
+            cursor:pointer;
+        }
+        .tab .tab1 {
+            background-color: #559EFF;
+            color: white;
+        }
+        .tab .tab2 {
+            /*background-color: white;*/
+            background-color: #dddddd;
+            /*color: black;*/
+            margin-left: 6px;
+        }
+
+
+        #gzdbTable,#gzybTable,#jqtsdbTable,#jqtsybTable {
+            width: 95%;
+            margin: 0 auto;
+        }
+
+        #gzdbTable tr,#gzybTable tr,#jqtsdbTable tr,#jqtsybTable tr {
+            height: 36px;
+        }
+
+        #gzdbTable tr td,#gzybTable tr td,#jqtsdbTable tr td,#jqtsybTable tr td {
+            border-bottom: 1px solid #EFEFEF;
+        }
+
+        .td_lx {
+            text-align: left;
+        }
+        .td_lx>div{
+            /*width: 300px;*/
+            /*overflow: hidden;*/
+            /*text-overflow:ellipsis;*/
+            /*white-space: nowrap;*/
+        }
+
+        /*违规情况问号*/
+        .wgqk-question{
+            background-color: #3170bf;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            color: #fff;
+            text-align: center;
+            vertical-align: middle;
+            border-radius: 100px;
+            display: inline-block;
+        }
+        .wgqk-question:hover{
+            color: white;
+        }
+
+        /*工作统计table*/
+        .work-tab{
+            padding-left: 0;
+            padding-top: 6px;
+        }
+        .work-tab > li{
+            float: left;
+            background-color: #dddddd;
+            list-style: none;
+            margin-left: 6px;
+            border-radius: 4px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .work-tab > li.work-table-checked{
+            background-color: #5895e5;
+            color: white;
+        }
+
+        .today-work{
+            margin-top: 6px;
+            padding: 10px;
+        }
+        .today-work > table{
+            width: 100%;
+            font-size: 16px;
+        }
+        .today-work > table img{
+            width: 20px;
+            vertical-align: -4px;
+        }
+        .today-work > table .today-work-count{
+            color: #3170bf;
+        }
+        .today-work > table tr{
+            height: 80px;
+            border-top: 1px dashed #ddd;
+            border-bottom: 1px dashed #ddd;
+        }
+        .today-work > table td:nth-child(odd){
+            width: 130px;
+            padding-left: 20px;
+        }
+        .today-work > table td:nth-child(even){
+            font-size: 22px;
+        }
+        /*工作统计table--end*/
+
+        /*查看更多*/
+        .more-detail{
+            font-size: 15px;
+            text-decoration: underline;
+            color: #2b94de;
+            float: right;
+            margin-right: 10px;
+        }
+        .more-detail:hover{
+            text-decoration: underline;
+        }
+        @media screen and (max-width: 1224px) {
+            html{
+                font-size: 14px;
+            }
+            .workItem2 {
+                height: 30%;
+            } 
+            .workItem2-title {
+                font-size: 1.1rem;
+                line-height: 2rem;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: 600;
+            }   
+            .workItem2-bg{
+                width: 2rem;
+                height: 2rem;
+            }    
+            .workItem2-content {
+                font-size: 0.65rem;
+            } 
+        }
+        @media screen and (min-width: 1224px) and (max-width: 1440px) {
+            html{
+                font-size: 14px;
+            }
+            .workItem2 {
+                height: 90%;
+            } 
+            .workItem2-title {
+                font-size: 1.4rem;
+                line-height: 2.4rem;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: 600;
+            }   
+            .workItem2-bg{
+                width: 2.4rem;
+                height: 2.4rem;
+            }    
+            .workItem2-content {
+                font-size: 0.85rem;
+            } 
+        }
+        @media screen and (min-width: 1440px) and (max-width: 1500px) {
+            html{
+                font-size: 16px;
+            }
+            .workItem2 {
+                height: 90%;
+            }
+            .workItem2-title {
+                font-size: 1.6rem;
+                line-height: 2.6rem;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: 600;
+            }   
+            .workItem2-bg{
+                width: 2.6rem;
+                height: 2.6rem;
+            }    
+            .workItem2-content {
+                font-size: 0.88rem;
+            } 
+        }
+        @media screen and (min-width: 1500px) and (max-width: 1680px) {
+            html{
+                font-size: 16px;
+            }
+            .workItem2 {
+                height: 95%;
+            }
+            .workItem2-title {
+                font-size: 1.8rem;
+                line-height: 3rem;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: 600;
+            }    
+            .workItem2-bg{
+                width: 3rem;
+                height: 3rem;
+            }   
+            .workItem2-content {
+                font-size: 0.95rem;
+            }    
+        }
+        @media screen and (min-width: 1680px) and (max-width: 1920px) {
+            html{
+                font-size: 20px;
+            }
+            .workItem2 {
+                height: 95%!important;
+            }
+            .workItem2-title {
+                font-size: 1.7rem;
+                line-height: 2.8rem;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: 600;
+            }    
+            .workItem2-bg{
+                width: 2.8rem;
+                height: 2.8rem;
+            }   
+            .workItem2-content {
+                font-size: 0.85rem;
+            }   
+        }
+        @media screen and (min-width: 1920px) and (max-width: 2180px) {
+            html{
+                font-size: 22px;
+            }
+            .workItem2 {
+                height: 100%!important;
+            }
+            .workItem2-title {
+                font-size: 1.7rem;
+                line-height: 2.8rem;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: 600;
+            }    
+            .workItem2-bg{
+                width: 2.8rem;
+                height: 2.8rem;
+            }   
+            .workItem2-content {
+                font-size: 0.85rem;
+            }  
+        }
+        @media screen and (min-width: 2180px) {
+            html{
+                font-size: 26px;
+            }
+            .workItem2 {
+                height: 100%!important;
+            }
+            .workItem2-title {
+                font-size: 1.7rem;
+                line-height: 2.8rem;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: 600;
+            }    
+            .workItem2-bg{
+                width: 2.8rem;
+                height: 2.8rem;
+            }   
+            .workItem2-content {
+                font-size: 0.85rem;
+            }  
+        }
+    </style>
+</head>
+
+<body>
+<!--左侧三模块-->
+<div id="divLeft">
+    <!--现关押量-->
+    <div id="divLeft_1" class="chart">
+        <div class="chart-title">
+            <div class="chart-title-split"></div><span>现关押量</span>
+        </div>
+        <div class="chart-content" style="padding-left: 0.5rem;">
+            <div style="padding-left: 1rem">
+                <!--总人数-->
+                <div id="divLeft_1_content1" style="margin-top: 16px;border:0px solid red;display:inline-block;overflow:hidden;min-width:80px;">
+                    <a href="javascript:void(0)" id="gyl" style="display: inline-block" onclick="loadingWindow(1)">
+                        <div class="peopleCount">1</div>
+                        <div class="peopleCount">2</div>
+                        <div class="peopleCount">3</div>
+                    </a>
+                </div>
+                <!--<br />-->
+                <!--男女人数-->
+                <div id="divLeft_1_content2" style="display:inline-block;    vertical-align: 7px;margin-left: 1rem;font-size:18px;">
+                    <div class="peopleCount2">
+                        <a href="javascript:void(0)" id="openMale" onclick="loadingWindow(2)">
+                            <img src="css/home/male.png" /><span id="male">468</span>
+                        </a>
+                    </div>
+                    <div class="peopleCount2">
+                        <a href="javascript:void(0)" id="openFemale" onclick="loadingWindow(3)">
+                            <img src="css/home/female.png" /><span id="female">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!--风险人数统计-->
+            <div id="divLeft_1_content3" style="border:0px solid red;overflow:hidden;margin-top: 10px;">
+                <a href="javascript:void(0)" class="fxry clearfix" id="openFirst" style="display: block;" onclick="loadingWindow(4)">
+                    <div class="fxry_top" style="">
+                        <div class="fxry_div_title">一级重大风险</div>
+                        <div class="fxry_div_val" id="first_level"></div>
+                    </div>
+                    <div style="" class="fxry_div_jd">
+                        <div class="jd jdzb"  id="first_level_bfb1" style="width:50%;background-color:#FFAD60;"></div>
+                        <div class="jd jdwzb" id="first_level_bfb2" style="width:50%;"></div>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" class="fxry clearfix" id="openSecond" style="display: block" onclick="loadingWindow(5)">
+                    <div class="fxry_top">
+                        <div class="fxry_div_title">二级重大风险</div>
+                        <div class="fxry_div_val" id="second_level"></div>
+                    </div>
+                    <div style="" class="fxry_div_jd">
+                        <div class="jd jdzb"  id="second_level_bfb1" style="width:12.5%;background-color:#ffed1f;"></div>
+                        <div class="jd jdwzb" id="second_level_bfb2" style="width:87.5%;"></div>
+                    </div>
+                </a>
+
+                <a href="javascript:void(0)" class="fxry clearfix" id="openThird" style="display: block;" onclick="loadingWindow(6)">
+                    <div class="fxry_top">
+                        <div class="fxry_div_title">三级重大风险</div>
+                        <div class="fxry_div_val" id="third_level"></div>
+                    </div>
+                    <div style="" class="fxry_div_jd">
+                        <div class="jd jdzb"  id="third_level_bfb1" style="width:37.5%;background-color:#06ea47;"></div>
+                        <div class="jd jdwzb" id="third_level_bfb2" style="width:62.5%"></div>
+                    </div>
+                </a>
+
+                <a href="javascript:void(0)" class="fxry clearfix" id="openFourthly" style="display: block;" onclick="loadingWindow(6)">
+                    <div class="fxry_top">
+                        <div class="fxry_div_title">一般风险</div>
+                        <div class="fxry_div_val" id="fourthly_level"></div>
+                    </div>
+                    <div style="" class="fxry_div_jd">
+                        <div class="jd jdzb"  id="fourthly_level_bfb1" style="width:37.5%;background-color:#5895e5;"></div>
+                        <div class="jd jdwzb" id="fourthly_level_bfb2" style="width:62.5%"></div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    <!--病源统计-->
+    <div id="divLeft_2" class="chart">
+        <div class="chart-title">
+            <div class="chart-title-split"></div><span>重点人员</span>
+        </div>
+        <div id="divPeoples">
+            <!--死刑-->
+            <a href="javascript:void(0)" class="peopleItem" id="openSx" onclick="loadingWindow(7)">
+                <div class="peopleItem-content"><span id="sx">0</span><span></span></div>
+                <div class="peopleItem-title"><span>死刑</span></div>
+            </a>
+            <div style="background-color:#f2f2f2;width:2px;float:left;height:25px;margin-top:20px;"></div>
+            <!--死缓-->
+            <a href="javascript:void(0)" class="peopleItem" id="openSh"  onclick="loadingWindow(8)">
+                <div class="peopleItem-content"><span id="sh">0</span><span></span></div>
+                <div class="peopleItem-title"><span>死缓</span></div>
+            </a>
+            <div style="background-color:#f2f2f2;width:2px;float:left;height:25px;margin-top:20px;"></div>
+            <!--无期徒刑-->
+            <a href="javascript:void(0)" class="peopleItem" id="openWqtx"  onclick="loadingWindow(9)">
+                <div class="peopleItem-content"><span id="wqtx">0</span><span></span></div>
+                <div class="peopleItem-title"><span>无期徒刑</span></div>
+            </a>
+            <!--危重病号-->
+            <a href="javascript:void(0)" class="peopleItem" id="openWzbh" onclick="loadingWindow(7)">
+                <div class="peopleItem-content"><span id="wzbh">0</span><span></span></div>
+                <div class="peopleItem-title"><span>危重病号</span></div>
+            </a>
+            <div style="background-color:#f2f2f2;width:2px;float:left;height:25px;margin-top:20px;"></div>
+            <!--艾滋病人员-->
+            <a href="javascript:void(0)" class="peopleItem" id="openAzb"  onclick="loadingWindow(8)">
+                <div class="peopleItem-content"><span id="azb">0</span><span></span></div>
+                <div class="peopleItem-title"><span>艾滋病人员</span></div>
+            </a>
+            <div style="background-color:#f2f2f2;width:2px;float:left;height:25px;margin-top:20px;"></div>
+            <!--传染病人员-->
+            <a href="javascript:void(0)" class="peopleItem" id="openCrb"  onclick="loadingWindow(9)">
+                <div class="peopleItem-content"><span id="crb">0</span><span></span></div>
+                <div class="peopleItem-title"><span>传染病人员</span></div>
+            </a>
+        </div>
+    </div>
+    <!--违规统计-->
+    <div id="divLeft_3" class="chart">
+        <div class="chart-title">
+            <div class="chart-title-split"></div><span>违规情况</span>
+            <a href="javascript:void (0);" class="wgqk-question">?</a>
+        </div>
+        <div class="chart-content" style="height: 100%;">
+            <!--完成率-->
+            <div id="divLeft_3_content1" style="height: 30%;padding-top: 5%;padding-left: 10%;">
+                <div class="workItem" style="width:40%;">
+                    <div class="workItem-title" id="work2">7</div>
+                    <div class="workItem-content" style="color:black;padding-top: 6px;"><span>违规总数</span></div>
+                </div>
+                <div class="workItem" style="width:40%;">
+                    <div class="workItem-title" id="work1">57%</div>
+                    <div class="workItem-content" style="color:black;padding-top: 6px;"><span>纠查完成率</span></div>
+                </div>
+            </div>
+            <div id="divLeft_3_content2" style="height: 50%;overflow:hidden;padding-top: 7%;">
+                <!--一般违规人数统计-->
+                <a href="javascript:void(0)" id="openYbwg" class="fxry clearfix" style="margin-top:10px;margin:0 auto;display: block;padding-left: 5%;" onclick="loadingWindow(10)">
+                    <div class="fxry_top" style="width: 80px;">
+                        <div class="fxry_div_title">一般违规</div>
+                        <div class="fxry_div_val" id="ybwg"></div>
+                    </div>
+                    <div style="width: calc(100% - 140px);" class="fxry_div_jd">
+                        <div class="jd jdzb" id="ybwg_bfb1" style="width:4%;background-color:#ff0000;"></div>
+                        <div class="jd jdwzb" id="ybwg_bfb2"  style="width:96%"></div>
+                    </div>
+                </a>
+                <!--轻微违规人数统计-->
+                <a href="javascript:void(0)" id="openQwwg" class="fxry clearfix" style="display: block;padding-left: 5%;" onclick="loadingWindow(11)">
+                    <div class="fxry_top" style="width: 80px;">
+                        <div class="fxry_div_title">轻微违规</div>
+                        <div class="fxry_div_val" id="qwwg"></div>
+                    </div>
+                    <div style="width: calc(100% - 140px);" class="fxry_div_jd">
+                        <div class="jd jdzb" id="qwwg_bfb1" style="width:94%;background-color:#00ff00;"></div>
+                        <div class="jd jdwzb" id="qwwg_bfb2"  style="width:6%"></div>
+                    </div>
+                </a>
+                <!--严重违规人数统计-->
+                <a href="javascript:void(0)" id="openYzwg" class="fxry clearfix" style="display: block;padding-left: 5%;" onclick="loadingWindow(12)">
+                    <div class="fxry_top" style="width: 80px;">
+                        <div class="fxry_div_title">严重违规</div>
+                        <div class="fxry_div_val" id="yzwg"></div>
+                    </div>
+                    <div style="width: calc(100% - 140px);" class="fxry_div_jd">
+                        <div class="jd jdzb" id="yzwg_bfb1" style="width:2%;background-color:#559EFF;"></div>
+                        <div class="jd jdwzb" id="yzwg_bfb2" style="width:98%"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--中间大模块-->
+<div id="divCenter">
+    <!--人员出入所统计-->
+    <div id="divCenter_1" class="chart" style="box-shadow: none;">
+        <a href="javascript:void(0)" class="modelItem" id="openRs" style="background-color:#60D482;" onclick="loadingWindow(13)">
+            <div class="modelItem-title" id="jrrs">23</div>
+            <div class="modelItem-content">今日入所</div>
+        </a>
+        <a href="javascript:void(0)" class="modelItem" id="openCs" style="background-color:#75B0FF;" onclick="loadingWindow(14)">
+            <div class="modelItem-title" id="jrcs">0</div>
+            <div class="modelItem-content">今日出所</div>
+        </a>
+
+        <a href="javascript:void(0)" class="modelItem" id="openJzxj" style="background-color:#61d582; " onclick="loadingWindow(16)">
+            <div class="modelItem-title" id="jzxj">0</div>
+            <div class="modelItem-content">加载械具</div>
+        </a>
+        <a href="javascript:void(0)" class="modelItem" id="openDdgy" style="background-color:#767676;" onclick="loadingWindow(16)">
+            <div class="modelItem-title" id="ddgy">0</div>
+            <div class="modelItem-content">单独关押</div>
+        </a>
+
+        <a href="javascript:void(0)" class="modelItem" id="openLscs" style="background-color:#FFC255;" onclick="loadingWindow(15)">
+            <div class="modelItem-title" id="lscs">0</div>
+            <div class="modelItem-content">临时出所</div>
+        </a>
+        <a href="javascript:void(0)" class="modelItem" id="openCsjy" style="background-color:#75B0FF; margin-right:0px;float:right;" onclick="loadingWindow(16)">
+            <div class="modelItem-title" id="csjy">0</div>
+            <div class="modelItem-content">出所就医</div>
+        </a>
+    </div>
+    <!--加载人员状态统计-->
+    <div id="divCenter_2" class="chart">
+        <div id="divCenter_2_content1" style="border:0px solid red;display:block;">
+            <div class="workItem2" id="openPeople1" style="width:25%;cursor:pointer;"  onclick="loadingWindow(17)">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people1">23</div>
+                <div class="workItem2-content" style="color:black;"><span>刑事拘留</span></div>
+            </div>
+            <div class="workItem2" id="openPeople3" style="width:25%;cursor:pointer;" onclick="loadingWindow(19)">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people2">23</div>
+                <div class="workItem2-content" style="color:black;"><span>逮捕</span></div>
+            </div>
+            <div class="workItem2" style="width:25%;cursor:pointer;"  onclick="loadingWindow(17)">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people3">0</div>
+                <div class="workItem2-content" style="color:black;"><span>公安补充侦察(1)</span></div>
+            </div>
+            <div class="workItem2" style="width:25%;cursor:pointer;" onclick="loadingWindow(19)">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people4">0</div>
+                <div class="workItem2-content" style="color:black;"><span>公安补充侦察(2)</span></div>
+            </div>
+            <div class="workItem2" style="width:25%;cursor:pointer;" onclick="loadingWindow(19)">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people5">0</div>
+                <div class="workItem2-content" style="color:black;"><span>审查起诉(1)</span></div>
+            </div>
+
+        </div>
+        <div id="divCenter_2_content2" style="border:0px solid red;display:block;">
+            <div class="workItem2" style="width:25%;cursor:pointer;" onclick="loadingWindow(19)">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people6">0</div>
+                <div class="workItem2-content" style="color:black;"><span>审查起诉(2)</span></div>
+            </div>
+            <div class="workItem2" style="width:25%;cursor:pointer;" onclick="loadingWindow(19)">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people7">0</div>
+                <div class="workItem2-content" style="color:black;"><span>审查起诉(3)</span></div>
+            </div>
+            <div class="workItem2" style="width:25%;cursor:pointer;" onclick="loadingWindow(19)">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people8">0</div>
+                <div class="workItem2-content" style="color:black;"><span>检察补充侦察</span></div>
+            </div>
+            <div class="workItem2" id="openPeople5" style="width:25%;">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people9">0</div>
+                <div class="workItem2-content" style="color:black;"><span>一审</span></div>
+            </div>
+            <div class="workItem2" id="openPeople6" style="width:25%;">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people10">0</div>
+                <div class="workItem2-content" style="color:black;"><span>二审</span></div>
+            </div>
+        </div>
+        <div id="divCenter_2_content3" style="border:0px solid red;display:block;">
+            <div class="workItem2" id="openPeople7" style="width:25%;">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people11">0</div>
+                <div class="workItem2-content" style="color:black;"><span>发回重审</span></div>
+            </div>
+            <div class="workItem2" id="openPeople8" style="width:25%;">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people12">0</div>
+                <div class="workItem2-content" style="color:black;"><span>死刑复核</span></div>
+            </div>
+            <div class="workItem2" id="openPeople4" style="width:25%;cursor:pointer;" onclick="loadingWindow(20)">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people13">0</div>
+                <div class="workItem2-content" style="color:black;"><span>待执行</span></div>
+            </div>
+            <div class="workItem2" id="openPeople2" style="width:25%;cursor:pointer;" onclick="loadingWindow(18)">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people14">0</div>
+                <div class="workItem2-content" style="color:black;"><span>已决人数</span></div>
+            </div>
+            <div class="workItem2" style="width:25%;cursor:pointer;" onclick="loadingWindow(18)">
+                <div class="workItem2-bg"></div>
+                <div class="workItem2-title" id="people15">0</div>
+                <div class="workItem2-content" style="color:black;"><span>其他</span></div>
+            </div>
+        </div>
+    </div>
+    <!--超期羁押提醒统计-->
+    <div id="divCenter_3" class="chart">
+        <div>
+            <ul class="work-tab clearfix">
+                <li class="work-table-checked">今日工作统计</li>
+                <li style="background: #e7e7e7;">进出人员数量统计</li>
+                <li style="padding: 10px 25px;background: #e7e7e7;">超期羁押</li>
+            </ul>
+        </div>
+        <div class="today-work">
+            <table>
+                <tr>
+                    <td>
+                        <img src="css/home/welcome/work_01.png" height="auto" width="100%"/>
+                        提押:</td>
+                    <td class="today-work-count" id="ty">0</td>
+                    <td>
+                        <img src="css/home/welcome/work_02.png" height="auto" width="100%"/>
+                        提讯会见:</td>
+                    <td class="today-work-count" id="txhj">0</td>
+                    <td>
+                        <img src="css/home/welcome/work_03.png" height="auto" width="100%"/>
+                        律师会见:</td>
+                    <td class="today-work-count" id="lshj">0</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="css/home/welcome/work_04.png" height="auto" width="100%"/>
+                        家属会见:</td>
+                    <td class="today-work-count" id="jshj">0</td>
+                    <td>
+                        <img src="css/home/welcome/work_05.png" height="auto" width="100%"/>
+                        所内就医:</td>
+                    <td class="today-work-count" id="snjy">0</td>
+                    <td>
+                        <img src="css/home/welcome/work_06.png" height="auto" width="100%"/>
+                        所内巡诊:</td>
+                    <td class="today-work-count" id="snxz">0</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="css/home/welcome/work_07.png" height="auto" width="100%"/>
+                        两下监室:</td>
+                    <td class="today-work-count" id="lxjs">0</td>
+                    <td>
+                        <img src="css/home/welcome/work_08.png" height="auto" width="100%"/>
+                        监室调整:</td>
+                    <td class="today-work-count" id="jstz">0</td>
+                    <td>
+                        <img src="css/home/welcome/work_09.png" height="auto" width="100%"/>
+                        谈话教育:</td>
+                    <td class="today-work-count" id="thjy">0</td>
+                </tr>
+            </table>
+        </div>
+        <div class="chart-content" id="chart_YLQS"></div>
+    </div>
+</div>
+<!--右侧俩模块-->
+<div id="divRight">
+    <div id="divRight_0" class="chart">
+        <div class="chart-title">
+            <div class="chart-title-split"></div>
+            <span>协同信息</span>
+            <a href="javascript:void(0)" class="more-detail" onclick="ckjqts('')">查看更多</a>
+            <hr style="margin:0px;" />
+        </div>
+        <div class="chart-content">
+            <div class="tabALLContent" style="overflow:auto;">
+                <div class="tabContent" id="xtContent1">
+                    <table id="xtTable"style="text-align:center;"></table>
+                </div>
+
+                <div class="tabContent" id="xtContent2" style="display:none;">
+                    <table id="xtTable2" style="text-align:center;"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="divRight_1" class="chart">
+        <div class="chart-title clearfix">
+            <div class="chart-title-split"></div><span>工作待办</span>
+            <a href="javascript:void(0)" class="more-detail" onclick="gzdbgd()">查看更多</a>
+            <hr style="margin:0px;" />
+        </div>
+        <div class="chart-content">
+            <div id="dbTab" class="tab" style="padding-left: 1.5rem;">
+                <div class="tab1" id="dbTab1" style="background: #3688e5;font-size: 0.9rem;width: 4rem;height: 1.4rem;line-height: 1.4rem;">待处理</div><div class="tab2" id="dbTab2" style="font-size: 0.9rem;width: 4rem;height: 1.4rem;line-height: 1.4rem;">已处理</div>
+            </div>
+            <div class="tabALLContent" style="overflow:auto;">
+                <div class="tabContent" id="tabContent1">
+                    <table id="gzdbTable" style="text-align:center;"></table>
+                </div>
+                <div class="tabContent" id="tabContent2" style="display:none;">
+                    <table id="gzybTable" style="text-align:center;"></table>
+                </div>
+            </div>
+            <!--<input id="btnOther1" class="btn btn-primary" type="button" value="查看更多" onclick="gzdbgd()"-->
+            <!--style="height:40px;width:80%;margin:10px auto 10px auto;display:block;" />-->
+        </div>
+    </div>
+    <div id="divRight_2" class="chart">
+        <div class="chart-title">
+            <div class="chart-title-split"></div>
+            <span>警情提示</span>
+            <a href="javascript:void(0)" class="more-detail" onclick="ckjqts('')">查看更多</a>
+            <hr style="margin:0px;" />
+        </div>
+        <div class="chart-content">
+            <div class="tab" style="padding-left: 1.5rem;">
+                <div class="tab1" id="jqTab1" style="background: #3688e5;font-size: 0.9rem;width: 4rem;height: 1.4rem;line-height: 1.4rem;">未读</div><div class="tab2" id="jqTab2" style="font-size: 0.9rem;width: 4rem;height: 1.4rem;line-height: 1.4rem;">已读</div>
+            </div>
+            <div class="tabALLContent" style="overflow:auto;">
+                <div class="tabContent" id="jqContent1">
+                    <table id="jqtsdbTable"style="text-align:center;"></table>
+                </div>
+
+                <div class="tabContent" id="jqContent2" style="display:none;">
+                    <table id="jqtsybTable" style="text-align:center;"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="plugins/jquery/jquery.min.js" type="text/javascript"></script>
+<script src="plugins/jquery-from/jquery.form.min.js" type="text/javascript"></script>
+<script src="plugins/layer/layer.js" type="text/javascript"></script>
+<script src="js/login.js" type="text/javascript"></script>
+<script src="plugins/echarts/echarts.min.js"></script>
+<script src="js/bowdenUitls.js"></script>
+<script src="js/bindEasyui.js"></script>
+<script src="js/common.js"></script>
+
+<script>
+    var loginUser=userUtil.getLoginUser();
+    var totalRy;//关押总人数
+    var totalWgry;//违规总人数
+    //加载人员状态统计
+    var people1;var people2;var people3;var people4;var people5;var people6;var people7;var people8;
+    var cqjyTitle=[];//超期羁押监区
+    var cqjyJqRs=[];//超期羁押监区人数
+
+    var echart_All = {};
+    $(document).ready(function () {
+        SetControlSize();
+        //LoadWG();
+        // LoadCenter2();
+        //LoadYLQS();
+        BindControlEvent();
+        dataLoading();
+    });
+
+
+    //数据项加载
+    function dataLoading() {
+
+        //加载现关押量
+        var xgylData=ajaxUtil.ajax("/syshome/getXgylData",JSON.stringify({UNIT_ID:loginUser.unitId,}),"application/json");
+        if(xgylData.code == "000000" && xgylData.data !=null){
+            var data = xgylData.data.rows;
+            totalRy = parseInt(data.p_gyl);  //记录总人数
+            //加载总人数
+            var zrs = data.p_gyl+'';
+            var html="";
+            for(var i = 0;zrs.length  >i;i++){
+                html+=' <div class="peopleCount">'+zrs.slice(i,i+1)+'</div>';
+            }
+            $("#gyl").html(html);
+
+            //男总数                     女总数
+            $("#male").text(data.p_nansrs);   $("#female").text(data.p_nvsrs);
+            //一级重大风险                             二级重大风险
+            $("#first_level").text(data.p_yijfxrs);   $("#second_level").text(data.p_erjfxrs);
+            //三级重大风险                            一般重大风险
+            $("#third_level").text(data.p_sanjfxrs);  $("#fourthly_level").text(data.p_ybfxrs);
+            //总风险人数
+            var sum=parseInt(data.p_yijfxrs)+parseInt(data.p_erjfxrs)+parseInt(data.p_sanjfxrs)+parseInt(data.p_ybfxrs);
+            var _percent3=sum!=0?Math.round(data.p_sanjfxrs/sum*100):0;
+            var _percent2=sum!=0?Math.round(data.p_erjfxrs/sum*100):0;
+            var _percent1=sum!=0?Math.round(data.p_yijfxrs/sum*100):0;
+            var _percent0=sum!=0?Math.round(data.p_ybfxrs/sum*100):0;
+            $("#third_level_bfb1").css("width",_percent3+"%"); $("#third_level_bfb2").css("width", (100-parseInt(_percent3))+"%");
+            $("#second_level_bfb1").css("width",_percent2+"%"); $("#second_level_bfb2").css("width", (100-parseInt(_percent2))+"%");
+            $("#first_level_bfb1").css("width",_percent1+"%"); $("#first_level_bfb2").css("width", (100-parseInt(_percent1))+"%");
+            $("#fourthly_level_bfb1").css("width",_percent0+"%"); $("#fourthly_level_bfb2").css("width", (100-parseInt(_percent0))+"%");
+        }
+
+        //重点人员相关数据获取
+        var zdryData=ajaxUtil.ajax("/syshome/getZdryData",JSON.stringify({UNIT_ID:loginUser.unitId,}),"application/json");
+        if(zdryData.code == "000000" && zdryData.data !=null){
+            var data = zdryData.data.rows;
+            $("#sx").html(data.p_sxrs); $("#sh").html(data.p_shrs);  $("#wqtx").html(data.p_wqtxrs);
+            $("#wzbh").html(data.p_bwbhrs);$("#azb").html(data.p_azbrs); $("#crb").html(data.p_crbrs);
+        }
+
+        //违规情况相关数据获取
+        var wgqkData=ajaxUtil.ajax("/syshome/getWgqkData",JSON.stringify({UNIT_ID:loginUser.unitId,}),"application/json");
+        if(wgqkData.code == "000000" && wgqkData.data !=null){
+            var data = wgqkData.data.rows;
+            $("#work2").html(data.p_wgzs);  $("#work1").html(data.p_wczs+"%");
+            //一般违规                             轻微违规
+            $("#ybwg").html(data.p_ybwg);         $("#qwwg").html(data.p_qwwg);
+            //严重违规
+            $("#yzwg").html(data.p_yzwg);
+
+            var _percent3=data.p_wgzs!=0?Math.round(data.p_ybwg/data.p_wgzs*100):0;
+            var _percent2=data.p_wgzs!=0?Math.round(data.p_qwwg/data.p_wgzs*100):0;
+            var _percent1=data.p_wgzs!=0?Math.round(data.p_yzwg/data.p_wgzs*100):0;
+            $("#ybwg_bfb1").css("width",_percent3+"%"); $("#ybwg_bfb2").css("width", (100-parseInt(_percent3))+"%");
+            $("#qwwg_bfb1").css("width",_percent2+"%"); $("#qwwg_bfb2").css("width", (100-parseInt(_percent2))+"%");
+            $("#yzwg_bfb1").css("width",_percent1+"%"); $("#yzwg_bfb2").css("width", (100-parseInt(_percent1))+"%");
+        }
+
+        //人员综合数据获取
+        var ryzhData=ajaxUtil.ajax("/syshome/getRyzhData",JSON.stringify({UNIT_ID:loginUser.unitId,}),"application/json");
+        if(ryzhData.code == "000000" && ryzhData.data !=null) {
+            var data = ryzhData.data.rows;
+            $("#jrrs").html(data.p_jrrs); $("#jrcs").html(data.p_jrcs); $("#jzxj").html(data.p_jdxj); $("#ddgy").html(data.p_ddgy);
+            $("#lscs").html(data.p_lscs); $("#csjy").html(data.p_csjy);
+
+            $("#people1").html(data.p_xsjl); $("#people2").html(data.p_db); $("#people3").html(data.p_gabczc1); $("#people4").html(data.p_gabczc2);
+            $("#people5").html(data.p_scqs1); $("#people6").html(data.p_scqs2); $("#people7").html(data.p_scqs3); $("#people8").html(data.p_jcbczc);
+            $("#people9").html(data.p_ys); $("#people10").html(data.p_es); $("#people11").html(data.p_fhcs); $("#people12").html(data.p_sxfh);
+            $("#people13").html(data.p_dzx); $("#people14").html(data.p_yj); $("#people15").html(data.p_qt);
+        }
+
+        //今日工作统计数据获取
+        var jrgzData=ajaxUtil.ajax("/syshome/getJrgztData",JSON.stringify({UNIT_ID:loginUser.unitId,}),"application/json");
+        if(jrgzData.code == "000000" && jrgzData.data !=null) {
+            var data = jrgzData.data.rows;
+            $("#ty").html(data.p_ty); $("#txhj").html(data.p_txhj); $("#lshj").html(data.p_lshj); $("#jshj").html(data.p_jshj);
+            $("#snjy").html(data.p_snjy); $("#snxz").html(data.p_snxz); $("#lxjs").html(data.p_lxjs); $("#jstz").html(data.p_jstz);
+            $("#thjy").html(data.p_thjy);
+        }
+
+
+
+        //工作统计tab切换
+        $('.work-tab>li').on('click',function () {
+            $(this).addClass('work-table-checked');
+            $(this).siblings().removeClass('work-table-checked')
+        });
+
+        //加载工作代办统计
+        var gzdbData=ajaxUtil.ajax("/syshome/getGzdb",{UNIT_ID:loginUser.unitId,CLZT:0,DQMJ_ID:loginUser.userId,page:1,rows:50});
+        var gzybData=ajaxUtil.ajax("/syshome/getGzdb",{UNIT_ID:loginUser.unitId,CLZT:1,DQMJ_ID:loginUser.userId,page:1,rows:50});
+        var gzdbhtml1="";
+        var gzdbhtml2="";
+        if(gzdbData != undefined && gzdbData !=null && gzdbData.data != null){
+            var gzdb = gzdbData.data.rows;
+            if(gzdb.length == 0){
+                gzdbhtml1 = "<span style='margin-left: 10px;font-size: 18px;'>暂无待办。</span>";
+            }else{
+                for(var i =0;gzdb.length > i;i++){
+                    gzdbhtml1 += '<tr>\n' +
+                        '<td class="td_lx">'+gzdb[i].CFSJ+'</td>\n' +
+                        '<td class="td_lx">'+gzdb[i].GZNR+'</td>\n' +
+                        '<td class="td_wq" style="width: 30px;"><a href="javascript:void(0)" onclick="gzbl(\''+gzdb[i].GZJL_GUID+'\')">办理</a></td>\n' +
+                        '</tr>';
+                }
+            }
+        }else{
+            gzdbhtml1 = "<span style='margin-left: 10px;font-size: 18px;'>暂无待办。</span>";
+        }
+        $("#gzdbTable").html(gzdbhtml1);
+        if(gzybData != undefined && gzybData !=null && gzybData.data != null){
+            var gzyb = gzybData.data;
+            if(gzdb.length == 0){
+                gzdbhtml2 = "<span style='margin-left: 10px;font-size: 18px;'>暂无待办。</span>";
+            }else {
+                for (var i = 0; gzyb.length > i; i++) {
+                    gzdbhtml2 += '<tr>\n' +
+                        '<td class="td_lx">' + gzyb[i].CFSJ + '</td>\n' +
+                        '<td class="td_lx">' + gzyb[i].GZNR + '</td>\n' +
+                        '</tr>';
+                }
+            }
+        }else{
+            gzdbhtml2 = "<span style='margin-left: 10px;font-size: 18px;'>暂无待办。</span>";
+        }
+        $("#gzybTable").html(gzdbhtml2);
+        //加载警情提示统计
+        var jqtswdData=ajaxUtil.ajax("/syshome/getJqts",JSON.stringify({UNIT_ID:loginUser.unitId,SFYD:1,TSMJ_ID:loginUser.userId}),"application/json");
+        var jqtyddData=ajaxUtil.ajax("/syshome/getJqts",JSON.stringify({UNIT_ID:loginUser.unitId,SFYD:0,TSMJ_ID:loginUser.userId}),"application/json");
+        var html1="";
+        if(jqtswdData != undefined && jqtswdData !=null && jqtswdData.data != null){
+            //未读
+            var wdjqts = jqtswdData.data.p_cur_jqts;
+            if(wdjqts.length == 0){
+                html1 = "<span style='margin-left: 10px;font-size: 18px;'>暂无提示。</span>";
+            }else{
+                for(var i =0;wdjqts.length > i;i++){
+                    html1 += '<tr  ondblclick="ckjqts(\''+ydjqts[i].GUID+'\'>\n' +
+                        '<td   class="td_lx">'+wdjqts[i].FBSJ+'</td>\n' +
+                        '<td  class="td_lx">'+wdjqts[i].TSXX+'</td>\n' +
+                        '</tr>';
+                }
+            }
+        }else{
+            html1 = "<span style='margin-left: 10px;font-size: 18px;'>暂无提示。</span>";
+        }
+        $("#jqtsdbTable").html(html1);
+        var html2="";
+        if(jqtyddData != undefined && jqtyddData !=null && jqtyddData.data != null){
+            //已读
+            var ydjqts = jqtyddData.data.p_cur_jqts;
+            if(ydjqts.length == 0){
+                html2 = "<span style='margin-left: 10px;font-size: 18px;'>暂无提示。</span>";
+            }else{
+                for(var i =0;ydjqts.length > i;i++){
+                    html2 += '<tr ondblclick="ckjqts(\''+ydjqts[i].GUID+'\')">\n' +
+                        '<td  class="td_lx">'+ydjqts[i].FBSJ+'</td>\n' +
+                        '<td  class="td_lx">'+ydjqts[i].TSXX+'</td>\n' +
+                        '</tr>';
+                }
+            }
+        }else{
+            html2 = "<span style='margin-left: 10px;font-size: 18px;'>暂无提示。</span>";
+        }
+        $("#jqtsybTable").html(html2);
+
+    }
+
+
+    //加载数据列表窗口
+    function loadingWindow(code) {
+        if(code == 1){
+            //总关押量
+            layer.open({
+                type: 2,
+                title: "所内总关押量",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/szgyl"
+            });
+        }else if(code == 2){
+            //男押员关押量
+            layer.open({
+                type: 2,
+                title: "所现男性关押量",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/snnanxgyl"
+            });
+        }else if(code == 3){
+            //女押员关押量
+            layer.open({
+                type: 2,
+                title: "所现女性关押量",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/snnvxgyl"
+            });
+        }else if(code == 4){
+            //一级风险押员关押量
+            layer.open({
+                type: 2,
+                title: "一级风险押员关押量",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/sn1jfxrygyl"
+            });
+        }else if(code == 5){
+            //二级风险押员关押量
+            layer.open({
+                type: 2,
+                title: "二级风险押员关押量",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/sn2jfxrygyl"
+            });
+        }else if(code == 6){
+            //三级风险押员关押量
+            layer.open({
+                type: 2,
+                title: "三级风险押员关押量",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/sn3jfxrygyl"
+            });
+        }else if(code == 7){
+            //病危押员关押量
+            layer.open({
+                type: 2,
+                title: "病危押员关押量",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/snbwrygyl"
+            });
+        }else if(code == 8){
+            //艾滋病押员关押量
+            layer.open({
+                type: 2,
+                title: "艾滋病押员关押量",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/snazbrygyl"
+            });
+        }else if(code == 9){
+            //传染病押员关押量
+            layer.open({
+                type: 2,
+                title: "传染病押员关押量",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/sncrbrygyl"
+            });
+        }else if(code == 10){
+            //一般违规关押量
+            layer.open({
+                type: 2,
+                title: "一般违规关押量",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/snybwgrygyl"
+            });
+        }else if(code == 11){
+            //轻微违规关押量
+            layer.open({
+                type: 2,
+                title: "轻微违规关押量",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/snqwwgrygyl"
+            });
+        }else if(code == 12){
+            //严重违规关押量
+            layer.open({
+                type: 2,
+                title: "严重违规关押量",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/snyzwgrygyl"
+            });
+        }else if(code == 13){
+            //今日入所统计
+            layer.open({
+                type: 2,
+                title: "今日入所统计",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/snjrrsrytj"
+            });
+        }else if(code == 14){
+            //今日出所统计
+            layer.open({
+                type: 2,
+                title: "今日出所统计",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/snjrcsrytj"
+            });
+        }else if(code == 15){
+            //今日临时出所统计
+            layer.open({
+                type: 2,
+                title: "今日临时出所统计",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/snlscsrytj"
+            });
+        }else if(code == 16){
+            //今日出所就医统计
+            layer.open({
+                type: 2,
+                title: "今日出所就医统计",
+                shade: 0.5,
+                area: ['90%', '90%'],
+                content: "home/sncsjyrytj"
+            });
+        }
+
+
+
+    }
+
+
+    //待处理、已处理 按钮点击事件 切换
+    function BindControlEvent() {
+        //待办未
+        $("#dbTab1").click(function () {
+            if ($("#dbTab1").hasClass("tab1")) {
+            } else {
+                $("#dbTab1").removeClass("tab2").addClass("tab1");
+                $("#dbTab2").removeClass("tab1").addClass("tab2");
+                $("#tabContent1").show();
+                $("#tabContent2").hide();
+            }
+        });
+
+        //待办已
+        $("#dbTab2").click(function () {
+            if ($("#dbTab2").hasClass("tab1")) {
+            } else {
+                $("#dbTab2").removeClass("tab2").addClass("tab1");
+                $("#dbTab1").removeClass("tab1").addClass("tab2");
+                $("#tabContent1").hide();
+                $("#tabContent2").show();
+            }
+        });
+
+        //警情提示未
+        $("#jqTab1").click(function () {
+            if ($("#jqTab1").hasClass("tab1")) {
+            } else {
+                $("#jqTab1").removeClass("tab2").addClass("tab1");
+                $("#jqTab2").removeClass("tab1").addClass("tab2");
+                $("#jqContent1").show();
+                $("#jqContent2").hide();
+            }
+        })
+
+        //警情提示已
+        $("#jqTab2").click(function () {
+            if ($("#jqTab2").hasClass("tab1")) {
+            } else {
+                $("#jqTab2").removeClass("tab2").addClass("tab1");
+                $("#jqTab1").removeClass("tab1").addClass("tab2");
+                $("#jqContent1").hide();
+                $("#jqContent2").show();
+            }
+        })
+    }
+    //工作待办更多按钮点击事件
+    function gzdbgd(){
+        layer.open({
+            type: 2,
+            title: "工作待办",
+            shade: 0.5,
+            area: ['90%', '90%'],
+            content: "home/sngzdbtj"
+        });
+    }
+    //工作待办 办理按钮点击事件
+    function gzbl(guid){
+        var gzdbxxData=ajaxUtil.ajax("/syshome/getGzdbPzxx",JSON.stringify({JLBH:guid}),"application/json");
+        if(gzdbxxData.code =="000000" && gzdbxxData.data != null && gzdbxxData.data != '' && gzdbxxData.data != undefined){
+            var gzdbxx = gzdbxxData.data;
+            if(gzdbxx.p_cklx == 0){
+                layer.open({
+                    type: 2,
+                    title: gzdbxx.p_ckmc,
+                    shade: 0.5,
+                    area: [ gzdbxx.p_ckgd+'px',gzdbxx.p_ckkd+'px'],
+                    content: gzdbxx.p_ywdz
+                });
+            }else if(gzdbxx.p_cklx == 1){
+                parent.layui.index.openTabsPage(gzdbxx.p_ywdz,gzdbxx.p_ckmc);
+            }else if(gzdbxx.p_cklx == 2){
+                window.open(gzdbxx.p_ywdz);
+            }
+        }else{
+            alert("此条记录已被办理或查询失败，请刷新页面。");
+        }
+    }
+    //警情提示 双击事件
+    function ckjqts(guid) {
+        layer.open({
+            type: 2,
+            title: "警情提示",
+            shade: 0.5,
+            area: ['90%', '90%'],
+            content: "home/snjqtsxq?GUID="+guid
+        });
+    }
+
+
+    //动态跟踪页面大小
+    function SetControlSize() {
+        heightWindow = $(window).height();
+        widthWindow = $(window).width();
+        height = heightWindow; //>= heightBody ? heightWindow : heightBody;
+        heightTool = 40; //$(".divTool").parent(".layui-row").height();
+        $("body").height(height);
+        var marginTopBottom = $("#divLeft").css("marginTop").substr(0, $("#divLeft").css("marginTop").length - 2) * 2;
+        $("#divLeft, #divCenter, #divRight").height(height - marginTopBottom);
+        var marginLeftRight = $("#divLeft").css("marginLeft").substr(0, $("#divLeft").css("marginLeft").length - 2) * 2
+        var marginInside = $("#divLeft").css("marginRight").substr(0, $("#divLeft").css("marginRight").length - 2)
+        //左
+        $("#divLeft").width((widthWindow - marginLeftRight - marginInside * 2) * 0.2);
+        $("#divCenter").width((widthWindow - marginLeftRight - marginInside * 2) * 0.5);
+        $("#divRight").width(widthWindow - marginLeftRight - marginInside * 2 - $("#divLeft").width() - $("#divCenter").width());
+        //中
+        $("#divLeft_1,#divLeft_3").height(($("#divLeft").height() - $("#divLeft_2").height() - marginInside * 2) * 0.5);
+        $("#divCenter_2").height(($("#divCenter").height() - $("#divCenter_1").height() - 20) * 0.55);
+        $("#divCenter_3").height(($("#divCenter").height() - $("#divCenter_1").height() - 20) * 0.45);
+        $("#divCenter_3>.chart-content").height(($("#divCenter_3").height() - $("#divCenter_3>.chart-title").height()));
+
+
+        //右
+        $("#divRight_0,#divRight_1,#divRight_2").height(($("#divRight").height() - marginInside*2) * 0.333333);
+
+        //今日入所、今日出所、临时出所、出所就医  宽度自适应
+        $(".modelItem").width((($("#divCenter_1").width() - 1) - marginInside * ($(".modelItem").length - 1)) / 6);
+
+        //未决、已决、留所、待执行等高度自适应
+        $("#divCenter_2_content1,#divCenter_2_content2,#divCenter_2_content3").height(($("#divCenter_2").height() - 60)/ 3);
+        // $(".workItem2-title").height($("#divCenter_2_content1").height() * 0.75);
+
+        //tr的高度
+        $('.today-work > table tr').height(($("#divCenter_3").height() - $('.work-tab').height() - 50)/3);
+
+        //工作待办高度自适应
+        $("#divRight_0 .tabALLContent").height($("#divRight_0").height() - $("#divRight_0 >.chart-title").height() - 40);
+        $("#divRight_1 .tabALLContent").height($("#divRight_1").height() - $("#divRight_1 >.chart-title").height() - $("#divRight_1 .tab").height() - 40);
+        $("#divRight_2 .tabALLContent").height($("#divRight_2").height() - $("#divRight_2 >.chart-title").height() - $("#divRight_2 .tab").height() - 40);
+
+        //违规情况
+        // $("#divLeft_3_content1,#divLeft_3_content2").height(($("#divLeft_3").height() - $("#divLeft_3>.chart-title").height()) / 2);
+
+        // $("#divLeft_3_content1 .workItem-title").height($("#divLeft_3_content1").height() - $("#divLeft_3_content1 .workItem-content").height() - 8);
+
+        $("#divLeft_3_content2 .fxry").css({ "marginBottom": ($("#divLeft_3_content2").height() - ($("#divLeft_3_content2 .fxry").height() * 3)) / 4 + 'px' });
+
+        //风险人员
+        $("#divLeft_1_content3").height($("#divLeft_1").height() - $("#divLeft_1>.chart-title").height() - $("#divLeft_1_content1").height() - 35);
+        $("#divLeft_1_content3 .fxry").css({ "marginTop": ($("#divLeft_1_content3").height() - ($("#divLeft_1_content3 .fxry").height() * 4)) / 5 + 'px' });
+    }
+    //浏览器变化
+    $(window).resize(function () {
+        SetControlSize();
+
+        if (echart_All.chart1) {
+            echart_All.chart1.resize();
+        }
+        if (echart_All.chart2) {
+            echart_All.chart2.resize();
+        }
+        if (echart_All.chart3) {
+            echart_All.chart3.resize();
+        }
+        if (echart_All.chart4) {
+            echart_All.chart4.resize();
+        }
+        if (echart_All.chart5) {
+            echart_All.chart5.resize();
+        }
+        if (echart_All.chart6) {
+            echart_All.chart6.resize();
+        }
+        if (echart_All.chart7) {
+            echart_All.chart7.resize();
+        }
+        if (echart_All.chart8) {
+            echart_All.chart8.resize();
+        }
+        if (echart_All.chart9) {
+            echart_All.chart9.resize();
+        }
+        if (echart_All.chart10) {
+            echart_All.chart10.resize();
+        }
+        if (echart_All.chart11) {
+            echart_All.chart11.resize();
+        }
+
+    });
+
+
+
+
+    function subSJ(value, row, index){
+        var x ='';
+        if(value!=null&&value.length>0){
+            x = value.substring(0,10);
+        }
+        return x;
+    }
+
+</script>
+</body>
+
+</html>
